@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food App</title>
+    <style>
+      #container {
+        /* background-image: url(""); */
+        height: 100vh;
+        background-color: aquamarine;
+      }
+      #nav {
+        display: flex;
+        width: 50%;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+      }
+      #right {
+        margin: 30px auto;
+        width: 60%;
+        height: 500px;
+      }
+      #inner {
+        width: 90%;
+        height: 450px;
+      }
+      #inner > div{
+        width: 90%;
+        height: 90%;
+        margin: auto;
+      }
+      #inner > div > img {
+        height: 90%;
+        width: 100%;
+        border: 20px solid rgb(240, 11, 87);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+          rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+      }
+      #inner > div > img:hover {
+        box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+      }
+      #food,
+      button {
+        height: 30px;
+        width: 150px;
+        margin: 40px 20px 20px 20px;
+        border: 2px solid rgb(245, 167, 180);
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+      }
+      #idfood {
+        font-size: 20px;
+        height: 60px;
+        width: 20%;
+        margin-left: 70%;
+        color: rgb(4, 41, 63);
+        text-align: center;
+       
+        
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+      }
+      #idfood:hover {
+        color: aliceblue;
+        box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+          rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="nav">
+        <select value="food_list" id="food">
+          <option value="fries">Fries</option>
+          <option value="coke">Coke</option>
+          <option value="coffee">Coffee</option>
+          <option value="burger">Burger</option>
+          <option value="pizza">Pizza</option>
+        </select>
+        <button onclick="orderfood()">Order Food</button>
+      </div>
+      <div id="idfood"></div>
+      <div id="right">
+        <div id="inner"></div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  function get(id) {
+    return document.getElementById(id).value;
+  }
+  async function orderfood() {
+    let food = get("food");
+    // let food= document.getElementById("food").value;
+    let status = "open";
+    let foodpromise = new Promise(function (resolve, reject) {
+      let time = Math.random() * 1000;
+      if (status === "close") {
+        reject("Shop Closed");
+      } else {
+        setTimeout(function () {
+          if (status === "open") {
+            resolve(food);
+          }
+        }, time);
+      }
+    });
+    try {
+      let res = await foodpromise;
+      if (food === "fries") {
+        fries();
+      } else if (food === "coke") {
+        coke();
+      } else if (food === "coffee") {
+        coffee();
+      } else if (food === "burger") {
+        burger();
+      } else if (food === "pizza") {
+        pizza();
+      }
+    } catch (err) {
+      console.log("error", err);
+      window.location.href = "error.html";
+    }
+  }
+
+  function fries() {
+    idfood.innerHTML = null;
+    inner.innerHTML = null;
+    let div = document.createElement("div");
+    let image = document.createElement("img");
+    image.src =
+      "https://media.istockphoto.com/photos/diverse-keto-dishes-picture-id1280158821?s=612x612";
+    div.append(image);
+    inner.append(div);
+    let num = Math.round(Math.random() * 1000 + 1234);
+    let foodid = document.createElement("p");
+    foodid.innerText = `OrderId: ${num}`;
+    idfood.append(foodid);
+  }
+  function coke() {
+    idfood.innerHTML = null;
+    inner.innerHTML = null;
+    let div = document.createElement("div");
+    let image = document.createElement("img");
+    image.src =
+      "https://media.istockphoto.com/photos/fizz-picture-id157636846?s=612x612";
+
+    // let id=  document.createElement("div");
+    div.append(image);
+    inner.append(div);
+    let num = Math.round(Math.random() * 1000 + 1234);
+    let foodid = document.createElement("p");
+    foodid.innerText = `OrderId: ${num}`;
+    idfood.append(foodid);
+  }
+  function coffee() {
+    idfood.innerHTML = null;
+    inner.innerHTML = null;
+    let div = document.createElement("div");
+    let image = document.createElement("img");
+    image.src =
+      "https://media.istockphoto.com/photos/close-up-hot-cappuccino-white-coffee-cup-with-heart-shape-latte-art-picture-id1166328231?s=612x612";
+
+    // let id=  document.createElement("div");
+    div.append(image);
+    inner.append(div);
+    let num = Math.round(Math.random() * 1000 + 1234);
+    let foodid = document.createElement("p");
+    foodid.innerText = `OrderId: ${num}`;
+    idfood.append(foodid);
+  }
+  function burger() {
+    idfood.innerHTML = null;
+    inner.innerHTML = null;
+    let div = document.createElement("div");
+    let image = document.createElement("img");
+    image.src =
+      "https://media.istockphoto.com/photos/cheeseburger-with-tomato-and-lettuce-on-wooden-board-picture-id1309352410";
+
+    // let id=  document.createElement("div");
+    div.append(image);
+    inner.append(div);
+    let num = Math.round(Math.random() * 10000 + 1234);
+    let foodid = document.createElement("p");
+    foodid.innerText = `OrderId: ${num}`;
+    idfood.append(foodid);
+  }
+  function pizza() {
+    idfood.innerHTML = null;
+    inner.innerHTML = null;
+    let div = document.createElement("div");
+    let image = document.createElement("img");
+    image.src =
+      "https://media.istockphoto.com/photos/homemade-pizza-picture-id1037020170?s=612x612";
+
+    // let id=  document.createElement("div");
+    div.append(image);
+    inner.append(div);
+    let num = Math.round(Math.random() * 10000 + 1234);
+    let foodid = document.createElement("p");
+    foodid.innerText = `OrderId: ${num}`;
+    idfood.append(foodid);
+  }
+</script>
